@@ -1,0 +1,180 @@
+\documentclass{article}
+\input{config}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Gal}{Gal}
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\mt}{\mapsto}
+\newcommand{\xra}{\xrightarrow}
+
+\newcommand{\cT}{\mathcal{T}}
+
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+
+
+\title{\Huge \textbf{Chapter 2}\\
+Topology Spaces and Continuous Function}
+\date{2025.1.31}
+\begin{document}
+\maketitle
+\newpage
+
+\begin{center}
+\section*{拓扑空间和连续函数}
+\end{center}
+
+\section{拓扑空间}
+\begin{definition}
+    集合\(X\)上的拓扑是\(X\)中有下列性质的子集构成的集合族\(\mathcal{T}\):\begin{enumerate}[label=\arabic*.]
+        \item \(\varnothing,X\in \cT\).
+        \item \(\cT\)的任意子集族的元素的并属于\(\cT\).
+        \item \(\cT\)的任意有限子集族的元素的交属于\(\cT\).
+    \end{enumerate}
+\end{definition}
+
+如果\(X\)是具有拓扑\(\cT\)的拓扑空间，我们说\(X\)的子集\(U\)是\(X\)的开集，若\(U\in \cT\)。根据拓扑的定义，\(\varnothing,X\)是开集，且开集的并和有限交都是开集。则定义了符合条件的开集就定义了拓扑。
+
+\begin{example}
+    集合\(X\)的幂集构成的拓扑称为离散拓扑。只包含\(X,\varnothing\)的拓扑称为平凡拓扑。
+\end{example}
+
+\begin{example}
+    \(X\)是集合。设\(\cT_f=\{U\mid X-U =X\text{，或\(X-U\)是有限的} \}\)。则\(\cT_f\)是\(X\)上的拓扑，称为有限补拓扑。类似地，可以定义\(T_c\)，将定义中的“有限”改为“可数”。
+\end{example}
+
+\begin{definition}
+设 $\mathcal{T}$ 和 $\mathcal{T}'$ 是给定集合 $X$ 上的两个拓扑。如果 $\mathcal{T}' \supseteq \mathcal{T}$，我们说 $\mathcal{T}'$ 比 $\mathcal{T}$ 更细；如果 $\mathcal{T}'$ 真包含 $\mathcal{T}$，我们说 $\mathcal{T}'$ 比 $\mathcal{T}$ 严格更细。在这两种情况下，我们也说 $\mathcal{T}$ 比 $\mathcal{T}'$ 更粗，或严格更粗。如果 $\mathcal{T}' \supseteq \mathcal{T}$ 或 $\mathcal{T} \supseteq \mathcal{T}'$，我们说 $\mathcal{T}$ 和 $\mathcal{T}'$ 是可比较的。
+\end{definition}
+
+拓扑的比较不总是必要的。
+
+
+\section{拓扑的基}
+
+\begin{definition}
+    \(X\)是集合。称为在\(X\)上的拓扑的基为\(X\)的子集族\(\mathcal{B}\)（其元素称为基元素）满足：
+    \begin{enumerate}[label=\arabic*.]
+        \item 对于每个\(x\in X\)，至少存在一个基元素\(B\in \mathcal{B}\)，使得\(x\in B\).
+        \item 设\(B_1,B_2\in\mathcal{B}\)，若\(x \in B_1\cap B_2 \)，则存在\(B_3\)使得\(x\in B_3\)且\(B_3 \subset B_1\cap B_2\).
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    设\(X\)是集合。\(X\)的单点集构成的集族是\(X\)的离散拓扑的基。
+\end{example}
+\begin{definition}
+    
+若\(\mathcal{B}\)满足这些条件，我们可以定义\(\mathcal{B}\)生成的拓扑\(\cT\)：\(X\)的子集\(U\)称为是在\(X\)上的开集，如果对每一个\(x\in U\)，存在基元素\(B\in \mathcal{B}\)，使得\(x\in B,B\subset U\)。
+\end{definition}
+我们将证明这是良定义的。
+\begin{proof}
+    平凡地，\(\varnothing,X \in \cT\)。考虑\(\cT\)中的指标集族\(\{U_\alpha\}_{\alpha\in J}\)，事实上，容易证明\(
+    U=\bigcup_{\alpha\in J} U_\alpha \in \cT
+    \)。考虑\(U_1,U_2\in \mathcal{T}\)，取\(x\in U_1\cap U_2\)，则存在\(B_i\)，使得\(x\in B_i\subset U_i~(i=1,2)\)。则存在\(B=B_1\cap B_2\)，使得\(x\in B,B\subset U_1\cap U_2\)。后递归可得。
+\end{proof}
+
+
+
+\begin{lemma}
+    设\(X\)是集合，\(\mathcal{B}\)是\(X\)上的拓扑\(\cT\)的基，则\(\cT\)是\(\mathcal{B}\)的所有元素的并集的集合族。
+\end{lemma}
+
+\begin{lemma}
+    设\(X\)是拓扑空间。设\(\mathcal{C}\)是\(X\)中的开集族，满足对于每一个开集\(U\subset X\)和每一个\(x\in U\)，存在元素\(C\in \mathcal{C}\)，使得\(x\in C\subset U\)。则\(\mathcal{C}\)是\(X\)的拓扑的基。
+\end{lemma}
+
+\begin{proof}
+    设\(x\in X\)，\(X\)是开集，故存在\(C\in \mathcal{C}\)，使得\(x\in C\)。
+    设\(C_1,C_2\in \mathcal{C}\)，若\(x\in C_1\cap C_2\)，因为\(C_1,C_2\)都是开集，故\(C_1\cap C_2\)也是开集，则存在\(C_3\in\mathcal{C}\)，使得\(x\in C_3\subset C_1\cap C_2\)。
+    
+    设\(\cT\)是\(X\)的开集族，需说明由\(\mathcal{C}\)生成的拓扑\(\cT'=\cT\)。首先，若\(U\in \cT\)，则\(U\)是\(X\)中的开集。则对于每一个\(x\in U\)，存在\(C\in \mathcal{C}\)，使得\(x\in C\subset U\).故\(U \in \cT'\)。反之，若\(U\in \cT'\)，则\(U=\bigcup_\alpha C_\alpha\)，其中\(C_\alpha\in \mathcal{C}\)，从而是开集。故\(U\in \cT\)，得证。
+\end{proof}
+
+若需要对拓扑进行比较，可以用拓扑的基来比较拓扑的精细程度。
+
+\begin{lemma}
+    设\(\mathcal{B},\mathcal{B}'\)分别为\(X\)上\(\cT,\cT'\)的基，则以下表述是等价的：\begin{enumerate}
+        \item \(\cT'\)比\(\cT\)更精细。
+        \item 对于\(x\in X\)，和每一个包含\(x\)的基元素\(B\in \mathcal{B}\)，存在基元素\(B'\in \mathcal{B}'\)，使得\(x\in B'\subset B\).
+    \end{enumerate}
+\end{lemma}
+
+下面我们在实数轴\(\RR\)上定义\(3\)种拓扑。
+
+\begin{definition}
+    设\(\mathcal{B}\)是\(\RR\)上所有开区间\((a,b)\)的集合族，其生成的拓扑称为\(\RR\)上的标准拓扑。
+    
+    设\(\mathcal{B}'\)是\(\RR\)上所有半开区间\([a,b)\)的集合族，其生成的拓扑称为\(\RR\)的下极限拓扑。此时\(\RR\)若具有下极限拓扑，则记为\(\RR_l\)。
+
+    设\(K=\{1/n\mid n\in \ZZ_+\}\)，\(\mathcal{B}''\)是所有的开区间\((a,b)\)和所有形如\((a,b)-K\)的集合族，其生成的拓扑称为\(\RR\)上的\(K-\)拓扑。此时\(\RR\)若具有\(K-\)拓扑，记为\(\RR_K\)。
+\end{definition}
+
+容易证明这是良定义的。考虑这些拓扑之间的关系。
+\begin{lemma}
+    \(\RR_l,\RR_K\)的拓扑比\(\RR\)上的标准拓扑更精细，但二者之间不可比较。
+\end{lemma}
+
+\begin{definition}
+    \(X\)上的拓扑的子基\(\mathcal{S}\)是\(X\)的子集族，其并集为\(X\)。由子基生成的拓扑由\(\mathcal{S}\)的元素的有限交的所有闭集的集合族\(\cT\)定义。
+\end{definition}
+
+\section{序拓扑}
+\section{积拓扑}
+\begin{definition}
+    设\(X,Y\)是拓扑空间。\(X\times Y\)上的积拓扑是以\(\mathcal{B}=\{U\times V \mid U,V 
+     \text{分别为\(X,Y\)上的开集}\}\)为基的拓扑。
+\end{definition}
+
+当\(X,Y\)上的拓扑由基给出时，我们给出积拓扑\(X\times Y\)中更具体的基。
+\begin{theorem}
+    若\(\mathcal{B,C}\)分别是拓扑空间\(X,Y\)上的基，则集族\[
+    \mathcal D=\{B\times C\mid B\in \mathcal{B},C\in \mathcal{C}  \}
+    \]是积拓扑\(X,Y\)的基。
+\end{theorem}
+用副基来表示积拓扑时常是有用的。在这之前，我们先定义投影映射。\begin{definition}
+    设\(\pi_1:X\times Y\ra X\)，定义为\[
+    \pi_1(x,y)=x
+    \]类似地，定义\(\pi_2:X\times Y\ra Y\)，定义为\[
+    \pi_2(x,y)=y
+    \]
+\end{definition}
+
+注意到，投影映射总是满射。若\(U\subset X\)是空集，则\(\pi_1^{-1}(U)=U\times Y\)也是\(X\times Y\)上的空集。
+
+\begin{theorem}
+    集族\[
+    \mathcal{S}=\{\pi_1^{-1} (U)\mid U\text{是\(X\)中的开集}\} \cup \{\pi_2^{-1} (V)\mid V\text{是\(Y\)中的开集}\}
+    \]
+    是积拓扑\(X\times Y\)的副基。
+\end{theorem}
+\begin{proof}
+    注意到，\(U\times V =\pi_1^{-1}(U)\cap \pi^{-1}_2(V)\)，这一点可以证明积拓扑含于\(\mathcal{S}\)生成的拓扑。
+\end{proof}
+\section{子空间}
+
+\begin{definition}
+    设\(X\)是带有拓扑\(\cT\)的拓扑空间。若\(Y\)是\(X\)的子集，集族\[
+    \cT_Y=\{Y\cap U \mid U\in \cT\}
+    \]是\(Y\)上的拓扑，称为子空间拓扑。带有这个拓扑，\(Y\)称为\(X\)的子空间；它的开集由\(Y\)和\(X\)的所有的开集的交构成。
+\end{definition}
+
+\begin{lemma}
+    若\(\mathcal{B}\)是拓扑空间\(X\)的基，则集族\[
+    \mathcal{B}_Y =\{B\cap Y \mid B\in \mathcal{B} \}
+    \]是\(Y\)上的子空间拓扑的基。
+\end{lemma}
+\(X\)和子空间\(Y\)上的开集一般是不等同的，叙述上通常会进行区分。
+
+\section{闭集、极限点}
+\section{连续函数}
+\section{度量空间}
+\end{document}
